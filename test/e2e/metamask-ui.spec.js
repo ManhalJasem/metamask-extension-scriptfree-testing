@@ -110,7 +110,7 @@ describe('MetaMask', function () {
   })
 
   after(async function () {
-    await driver.quit()
+    console.log('Closing browser')
   })
 
   describe('Going through the first time flow', () => {

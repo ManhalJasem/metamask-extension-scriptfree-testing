@@ -57,10 +57,11 @@ async function setupBrowserAndExtension ({ browser, extPath }) {
 }
 
 function buildChromeWebDriver (extPath, opts = {}) {
-  const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), 'mm-chrome-profile'))
+  // const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), 'mm-chrome-profile'))
+  const chromeProfile = "/home/manhal/.config/google-chrome/mm-chrome-profile-metamask-ui-test"
   const args = [
     `load-extension=${extPath}`,
-    `user-data-dir=${tmpProfile}`,
+    `user-data-dir=${chromeProfile}`,
   ]
   if (opts.responsive) {
     args.push('--auto-open-devtools-for-tabs')
