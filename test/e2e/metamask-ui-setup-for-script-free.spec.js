@@ -9,7 +9,7 @@ const {
   installWebExt,
   getExtensionIdChrome,
   getExtensionIdFirefox,
-} = require('./func')
+} = require('./func-script-free-setup')
 const {
   assertElementNotPresent,
   checkBrowserForConsoleErrors,

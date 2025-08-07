@@ -1,0 +1,75 @@
+show_account_information:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - enter "correct horse battery staple" in "password" 
+  - click "Log In"
+  - ---
+  # Actual test cases starts here
+  # Shows the correct account address
+  - click "Account Details"
+  - ---
+  - assert element "qr wrapper"
+  - assert element "qr ellipse address"
+  - assert string "0x0Cc5261AB8cE458dc977078A3623E2BaDD27afD3" exist
+  - execute script "document.querySelector('.account-modal-close').click()"
+
+add_account:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - enter "correct horse battery staple" in "password" 
+  - click "Log In"
+  - ---
+  # Actual test cases starts here
+  - click "Network name"
+  - ---
+  - click "localhost 8545"
+  - assert element "account details"
+  - ---
+  - execute script "document.querySelector('.account-menu__icon').click(); document.querySelector('.menu__item.menu__item.menu__item--clickable').click();"
+  - ---
+  - enter "2nd account" in "account name"
+  - click "Create"
+  - ---
+  - assert element "2nd account"
+
+
+import_account_with private_key:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - enter "correct horse battery staple" in "password" 
+  - click "Log In"
+  # Actual test case starts here
+  - ---
+  - execute script "document.querySelector('.account-menu__icon').click()"
+  - ---
+  - click "Import Account"
+  - ---
+  - enter "14abe6f4aab7f9f626fe981c864d0adeb5685f289ac9270c27b8fd790b4235d6" in "private key"
+  - click "Import"
+  - ---
+  - assert element "Account 4"
+  - assert string "IMPORTED" exist
+
+import_and_remove_account:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - enter "correct horse battery staple" in "password" 
+  - click "Log In"
+  # Actual test case starts here
+  - ---
+  - execute script "document.querySelector('.account-menu__icon').click()"
+  - ---
+  - click "Import Account"
+  - ---
+  - enter "F4EC2590A0C10DE95FBF4547845178910E40F5035320C516A18C117DE02B5669" in "private key"
+  - click "Import"
+  - ---
+  - assert element "Account 5"
+  - execute script "document.querySelector('.account-menu__icon').click()"
+  - ---
+  - click "Remove Account"
+  - ---
+  - execute script "document.querySelector('.account-menu__icon').click(); document.querySelector('.menu__item.menu__item.menu__item--clickable:nth-child(2)').click();"
+
+
+
