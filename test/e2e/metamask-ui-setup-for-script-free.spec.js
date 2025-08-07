@@ -9,7 +9,7 @@ const {
   installWebExt,
   getExtensionIdChrome,
   getExtensionIdFirefox,
-} = require('./func')
+} = require('./func-script-free-setup')
 const {
   assertElementNotPresent,
   checkBrowserForConsoleErrors,
@@ -111,6 +111,7 @@ describe('MetaMask', function () {
 
   after(async function () {
     console.log('Closing browser')
+    await driver.quit()
   })
 
   describe('Going through the first time flow', () => {
