@@ -6,7 +6,7 @@ CHROMEDRIVER_LOCATION = "/usr/local/bin/chromedriver"
 MODEL_LOCATION = "data"
 TESTCASE_DIR = "test_cases_metamask_experiment"
 TESTCASE_FILE = "metamaskui"
-APP_SPECIFIC_CHROME_OPTIONS = ["--user-data-dir=/home/manhal/.config/google-chrome/mm-chrome-profile-metamask-ui-test-after-update-b7eae4b", 
+APP_SPECIFIC_CHROME_OPTIONS = ["--user-data-dir=/home/manhal/.config/google-chrome/mm-chrome-profile-metamask-ui-test-after-update-before-locator-b7eae4b", 
                                "--load-extension=/home/manhal/dev2/metamask-extension/dist/chrome"]
 ALL_TESTCASE = True # Run all test case
 TESTCASES = ["show_qr_code"] # test case set to run if ALL_TESTCASE==false
