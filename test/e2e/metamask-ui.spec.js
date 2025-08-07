@@ -110,7 +110,7 @@ describe('MetaMask', function () {
   })
 
   after(async function () {
-    console.log('not quitting WebDriver—Chrome will remain open.');
+    driver.quit()
   })
 
   describe('Going through the first time flow', () => {
