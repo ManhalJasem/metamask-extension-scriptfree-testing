@@ -19,6 +19,7 @@
     "test:integration": "yarn test:integration:build && yarn test:flat",
     "test:integration:build": "gulp build:scss",
     "test:e2e:chrome": "SELENIUM_BROWSER=chrome test/e2e/run-all.sh",
+    "test:e2e:scriptfree": "SELENIUM_BROWSER=chrome test/e2e/metamask-ui-setup-for-script-free.sh",
     "test:web3:chrome": "SELENIUM_BROWSER=chrome test/e2e/run-web3.sh",
     "test:web3:firefox": "SELENIUM_BROWSER=firefox test/e2e/run-web3.sh",
     "test:e2e:firefox": "SELENIUM_BROWSER=firefox test/e2e/run-all.sh",
