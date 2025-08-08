@@ -48,7 +48,7 @@ yarn test:e2e:scriptfree
 
 | Before change               | After change                                  |
 | --------------------------- | --------------------------------------------- |
-| `before_app_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
+| `after_app_change_before_locator_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
 
 ---
 
