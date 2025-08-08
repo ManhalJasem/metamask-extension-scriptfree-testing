@@ -48,10 +48,25 @@ yarn test:e2e:scriptfree
 
 | Before change               | After change                                  |
 | --------------------------- | --------------------------------------------- |
-| `before_app_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
+| `after_app_change_before_locator_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
 
 ---
+## Running the experiment
 
+- Checkout to the branch before test locator change e.g. `git checkout after_app_change_before_locator_change_b7eae4b`
+- Expected results in the before locator change is that the normal e2e tests fail due to not located element
+- To run normal e2e test execute `yarn test:e2e:chrome`
+- Make sure the tests fail
+- Now, you can run the scriptfree tests with `yarn test:e2e:scriptfree`
+- After Script generation, adjust the metamask runner in "test/e2e/script-free-implementation/test_script/metamask_exp/metamask_tests_runner.py 
+  to run the newly generated selenium script.
+- run the script with `./test/e2e/metamask-ui-run-generated-script`
+- The script should work fine (tip: check screenshots)
+- After ensuring correct run in the before change branch we run the scriptfree test in the after change branch
+- Now `git checkout after_app_change_and_locator_change_b7eae4b`
+- Expected results here are that both the normal and the script free tests succeed
+- follow the same steps as before
+---
 ## MetaMask Browser Extension
 
 The original MetaMask extension source is available at
