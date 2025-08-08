@@ -219,5 +219,36 @@ describe('MetaMask', function () {
     })
   })
 
+  describe('Show account information', () => {
+    it('shows the QR code for the account', async () => {
+      await driver.findElement(By.css('.account-details__details-button')).click()
+      await driver.findElement(By.css('.qr-wrapper')).isDisplayed()
+      await delay(regularDelayMs)
 
+      const accountModal = await driver.findElement(By.css('span .modal'))
+
+      await driver.executeScript("document.querySelector('.account-modal-close').click()")
+
+      await driver.wait(until.stalenessOf(accountModal))
+      await delay(regularDelayMs)
+    })
+  })
+
+  describe('Log out an log back in', () => {
+    it('logs out of the account', async () => {
+      await driver.findElement(By.css('.account-menu__icon')).click()
+      await delay(regularDelayMs)
+
+      const logoutButton = await findElement(driver, By.css('.account-menu__logout-button'))
+      assert.equal(await logoutButton.getText(), 'Log out')
+      await logoutButton.click()
+      await delay(regularDelayMs)
+    })
+
+    it('accepts the account password after lock', async () => {
+      await driver.findElement(By.id('password')).sendKeys('correct horse battery staple')
+      await driver.findElement(By.id('password')).sendKeys(Key.ENTER)
+      await delay(largeDelayMs * 4)
+    })
+  })
 })
