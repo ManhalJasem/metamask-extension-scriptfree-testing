@@ -14,8 +14,8 @@ class DriverManager:
         options.binary_location = "/usr/bin/google-chrome"
         options.add_experimental_option("prefs", {"intl.accept_languages": "en_US"})
         options.add_argument("--no-sandbox")
-        options.add_argument("--user-data-dir=/home/manhal/.config/google-chrome/mm-chrome-profile-metamask-ui-test-before-update-b7eae4b")
-        options.add_argument("--load-extension=/home/manhal/dev2/metamask-extension/dist/chrome")
+        options.add_argument("--user-data-dir=chrome-profiles/mm-chrome-profile")
+        options.add_argument("--load-extension=../../../dist/chrome")
         self.__driver = webdriver.Chrome(service=service, options=options)
     
     def get_driver(self):

@@ -21,7 +21,7 @@ const {
   switchToWindowWithTitle,
   verboseReportOnFailure,
   waitUntilXWindowHandles,
-} = require('./helpers')
+} = require('./helpers.js')
 const fetchMockResponses = require('./fetch-mocks.js')
 
 describe('MetaMask', function () {
@@ -110,8 +110,7 @@ describe('MetaMask', function () {
   })
 
   after(async function () {
-    console.log('Closing browser')
-    await driver.quit()
+    driver.quit()
   })
 
   describe('Going through the first time flow', () => {

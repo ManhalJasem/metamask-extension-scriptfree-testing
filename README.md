@@ -1,76 +1,68 @@
-# MetaMask Browser Extension
-[![Build Status](https://circleci.com/gh/MetaMask/metamask-extension.svg?style=shield&circle-token=a1ddcf3cd38e29267f254c9c59d556d513e3a1fd)](https://circleci.com/gh/MetaMask/metamask-extension) [![Coverage Status](https://coveralls.io/repos/github/MetaMask/metamask-extension/badge.svg?branch=master)](https://coveralls.io/github/MetaMask/metamask-extension?branch=master)
+## Script-Free Testing
 
-You can find the latest version of MetaMask on [our official website](https://metamask.io/). For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/hc/en-us).
+This project integrates the “script-free” GUI-testing technique introduced by Kirinuki *et al.* (ICSME 2021 & SANER 2022). Instead of brittle, locator-based Selenium code, each test step is expressed in plain English (e.g., `click "Login"`), and the framework uses NLP and heuristic search to identify the correct element at runtime.
 
-For up to the minute news, follow our [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
+### Objectives
 
-To learn how to develop MetaMask-compatible applications, visit our [Developer Docs](https://metamask.github.io/metamask-docs/).
+* **Lower maintenance costs** by eliminating explicit locators and reducing test flakiness after UI changes.
+* **Assess robustness** of the script-free approach on evolving web applications and real-world test suites.
+* **Provide a reproducible benchmark** (build scripts, Docker setup, and example branches) so others can compare against traditional locator-repair techniques.
+* **Document best practices** and pitfalls discovered while adopting script-free testing in a standard Node/Playwright workflow.
 
-To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
+---
 
-## Building locally
+## Getting Started
 
-- Install [Node.js](https://nodejs.org) version 10
-    - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
-- Install [Yarn](https://yarnpkg.com/en/docs/install)
-- Install dependencies: `yarn`
-- Build the project to the `./dist/` folder with `yarn dist`.
-- Optionally, to start a development build (e.g. with logging and file watching) run `yarn start` instead.
-    - To start the [React DevTools](https://github.com/facebook/react-devtools) and [Redux DevTools Extension](http://extension.remotedev.io)
-      alongside the app, use `yarn start:dev`.
-      - React DevTools will open in a separate window; no browser extension is required
-      - Redux DevTools will need to be installed as a browser extension. Open the Redux Remote Devtools to access Redux state logs. This can be done by either right clicking within the web browser to bring up the context menu, expanding the Redux DevTools panel and clicking Open Remote DevTools OR clicking the Redux DevTools extension icon and clicking Open Remote DevTools.
-        - You will also need to check the "Use custom (local) server" checkbox in the Remote DevTools Settings, using the default server configuration (host `localhost`, port `8000`, secure connection checkbox unchecked)
+### 1 · Prerequisites
 
-Uncompressed builds can be found in `/dist`, compressed builds can be found in `/builds` once they're built.
+| Tool        | Recommended Version | Notes                                                                                       |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------- |
+| **Node.js** | 10.x                | `nvm use` will auto-select the right version.                                               |
+| **Yarn**    | ≥ 1.22              | Install via `npm i -g yarn` or follow the [Yarn docs](https://yarnpkg.com/en/docs/install). |
 
-## Contributing
+### 2 · Script-Free Preparation
 
-You can read [our internal docs here](https://metamask.github.io/metamask-extension/).
+Follow the step-by-step setup in [`test/e2e/script-free-implementation/readme.md`](./test/e2e/script-free-implementation/readme.md) **before** continuing.
 
-You can re-generate the docs locally by running `yarn doc`, and contributors can update the hosted docs by running `yarn publish-docs`.
+---
 
-### Running Tests
-
-Run tests with `yarn test`.
-
-You can also test with a continuously watching process, via `yarn watch`.
-
-You can run the linter by itself with `yarn lint`.
-
-## Architecture
-
-[![Architecture Diagram](./docs/architecture.png)][1]
-
-## Development
+## Building Local Test Bundles
 
 ```bash
-yarn
-yarn start
+git checkout <branch-to-test>   # e.g. before_app_change_b7eae4b
+yarn            # install dependencies
+yarn build:test # outputs uncompressed files to /dist and compressed builds to /builds
 ```
 
-## Build for Publishing
+---
+
+## Running Script-Free End-to-End Tests
 
 ```bash
-yarn dist
+yarn test:e2e:scriptfree
 ```
 
-#### Writing Browser Tests
+---
 
-To write tests that will be run in the browser using QUnit, add your test files to `test/integration/lib`.
+## Example Branch Pairs for Locator-Change Experiments
 
-## Other Docs
+| Before change               | After change                                  |
+| --------------------------- | --------------------------------------------- |
+| `before_app_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
 
-- [How to add custom build to Chrome](./docs/add-to-chrome.md)
-- [How to add custom build to Firefox](./docs/add-to-firefox.md)
-- [How to add a new translation to MetaMask](./docs/translating-guide.md)
-- [Publishing Guide](./docs/publishing.md)
-- [The MetaMask Team](./docs/team.md)
-- [How to live reload on local dependency changes](./docs/developing-on-deps.md)
-- [How to add new networks to the Provider Menu](./docs/adding-new-networks.md)
-- [How to port MetaMask to a new platform](./docs/porting_to_new_environment.md)
-- [How to use the TREZOR emulator](./docs/trezor-emulator.md)
-- [How to generate a visualization of this repository's development](./docs/development-visualization.md)
+---
 
-[1]: http://www.nomnoml.com/#view/%5B%3Cactor%3Euser%5D%0A%0A%5Bmetamask-ui%7C%0A%20%20%20%5Btools%7C%0A%20%20%20%20%20react%0A%20%20%20%20%20redux%0A%20%20%20%20%20thunk%0A%20%20%20%20%20ethUtils%0A%20%20%20%20%20jazzicon%0A%20%20%20%5D%0A%20%20%20%5Bcomponents%7C%0A%20%20%20%20%20app%0A%20%20%20%20%20account-detail%0A%20%20%20%20%20accounts%0A%20%20%20%20%20locked-screen%0A%20%20%20%20%20restore-vault%0A%20%20%20%20%20identicon%0A%20%20%20%20%20config%0A%20%20%20%20%20info%0A%20%20%20%5D%0A%20%20%20%5Breducers%7C%0A%20%20%20%20%20app%0A%20%20%20%20%20metamask%0A%20%20%20%20%20identities%0A%20%20%20%5D%0A%20%20%20%5Bactions%7C%0A%20%20%20%20%20%5BbackgroundConnection%5D%0A%20%20%20%5D%0A%20%20%20%5Bcomponents%5D%3A-%3E%5Bactions%5D%0A%20%20%20%5Bactions%5D%3A-%3E%5Breducers%5D%0A%20%20%20%5Breducers%5D%3A-%3E%5Bcomponents%5D%0A%5D%0A%0A%5Bweb%20dapp%7C%0A%20%20%5Bui%20code%5D%0A%20%20%5Bweb3%5D%0A%20%20%5Bmetamask-inpage%5D%0A%20%20%0A%20%20%5B%3Cactor%3Eui%20developer%5D%0A%20%20%5Bui%20developer%5D-%3E%5Bui%20code%5D%0A%20%20%5Bui%20code%5D%3C-%3E%5Bweb3%5D%0A%20%20%5Bweb3%5D%3C-%3E%5Bmetamask-inpage%5D%0A%5D%0A%0A%5Bmetamask-background%7C%0A%20%20%5Bprovider-engine%5D%0A%20%20%5Bhooked%20wallet%20subprovider%5D%0A%20%20%5Bid%20store%5D%0A%20%20%0A%20%20%5Bprovider-engine%5D%3C-%3E%5Bhooked%20wallet%20subprovider%5D%0A%20%20%5Bhooked%20wallet%20subprovider%5D%3C-%3E%5Bid%20store%5D%0A%20%20%5Bconfig%20manager%7C%0A%20%20%20%20%5Brpc%20configuration%5D%0A%20%20%20%20%5Bencrypted%20keys%5D%0A%20%20%20%20%5Bwallet%20nicknames%5D%0A%20%20%5D%0A%20%20%0A%20%20%5Bprovider-engine%5D%3C-%5Bconfig%20manager%5D%0A%20%20%5Bid%20store%5D%3C-%3E%5Bconfig%20manager%5D%0A%5D%0A%0A%5Buser%5D%3C-%3E%5Bmetamask-ui%5D%0A%0A%5Buser%5D%3C%3A--%3A%3E%5Bweb%20dapp%5D%0A%0A%5Bmetamask-contentscript%7C%0A%20%20%5Bplugin%20restart%20detector%5D%0A%20%20%5Brpc%20passthrough%5D%0A%5D%0A%0A%5Brpc%20%7C%0A%20%20%5Bethereum%20blockchain%20%7C%0A%20%20%20%20%5Bcontracts%5D%0A%20%20%20%20%5Baccounts%5D%0A%20%20%5D%0A%5D%0A%0A%5Bweb%20dapp%5D%3C%3A--%3A%3E%5Bmetamask-contentscript%5D%0A%5Bmetamask-contentscript%5D%3C-%3E%5Bmetamask-background%5D%0A%5Bmetamask-background%5D%3C-%3E%5Bmetamask-ui%5D%0A%5Bmetamask-background%5D%3C-%3E%5Brpc%5D%0A
+## MetaMask Browser Extension
+
+The original MetaMask extension source is available at
+[https://github.com/MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension).
+
+---
+
+## Further Reading
+
+* Kirinuki *et al.* “NLP-Assisted Web Element Identification Toward Script-Free Testing” — ICSME 2021.
+* Kirinuki *et al.* “Web Element Identification by Combining NLP and Heuristic Search for Web Testing” — SANER 2022.
+* Jasem “Assessing the Robustness of Script-Free GUI Testing in Evolving Web Applications” — Bachelor Thesis Proposal, Ruhr-Uni Bochum (2025).
+
+
