@@ -1,24 +1,68 @@
-# Scriptfree Testing
-Refere to this [paper](https://ieeexplore.ieee.org/document/9609160)
+## Script-Free Testing
 
-## Scriptfree Preparation
-Follow steps in this [manual](./test/e2e/script-free-implementation/readme.md) before continuing next steps.
+This project integrates the “script-free” GUI-testing technique introduced by Kirinuki *et al.* (ICSME 2021 & SANER 2022). Instead of brittle, locator-based Selenium code, each test step is expressed in plain English (e.g., `click "Login"`), and the framework uses NLP and heuristic search to identify the correct element at runtime.
 
-## Building Test Builds locally
+### Objectives
 
-- Choose the branch you want to test, git checkout ...
-- Install [Node.js](https://nodejs.org) version 10
-    - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
-- Install [Yarn](https://yarnpkg.com/en/docs/install)
-- Install dependencies: `yarn`
-- Build the test project to the `./dist/` folder with `yarn build:test`.
-Uncompressed builds can be found in `/dist`, compressed builds can be found in `/builds` once they're built.
+* **Lower maintenance costs** by eliminating explicit locators and reducing test flakiness after UI changes.
+* **Assess robustness** of the script-free approach on evolving web applications and real-world test suites.
+* **Provide a reproducible benchmark** (build scripts, Docker setup, and example branches) so others can compare against traditional locator-repair techniques.
+* **Document best practices** and pitfalls discovered while adopting script-free testing in a standard Node/Playwright workflow.
 
-## Running Script free Tests
+---
 
-- Run `yarn test:e2e:scriptfree`
+## Getting Started
 
+### 1 · Prerequisites
+
+| Tool        | Recommended Version | Notes                                                                                       |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------- |
+| **Node.js** | 10.x                | `nvm use` will auto-select the right version.                                               |
+| **Yarn**    | ≥ 1.22              | Install via `npm i -g yarn` or follow the [Yarn docs](https://yarnpkg.com/en/docs/install). |
+
+### 2 · Script-Free Preparation
+
+Follow the step-by-step setup in [`test/e2e/script-free-implementation/readme.md`](./test/e2e/script-free-implementation/readme.md) **before** continuing.
+
+---
+
+## Building Local Test Bundles
+
+```bash
+git checkout <branch-to-test>   # e.g. before_app_change_b7eae4b
+yarn            # install dependencies
+yarn build:test # outputs uncompressed files to /dist and compressed builds to /builds
+```
+
+---
+
+## Running Script-Free End-to-End Tests
+
+```bash
+yarn test:e2e:scriptfree
+```
+
+---
+
+## Example Branch Pairs for Locator-Change Experiments
+
+| Before change               | After change                                  |
+| --------------------------- | --------------------------------------------- |
+| `before_app_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
+
+---
 
 ## MetaMask Browser Extension
 
-HERE is the link for the original MetaMask Extension: https://github.com/MetaMask/metamask-extension
+The original MetaMask extension source is available at
+[https://github.com/MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension).
+
+---
+
+## Further Reading
+
+* Kirinuki *et al.* “NLP-Assisted Web Element Identification Toward Script-Free Testing” — ICSME 2021.
+* Kirinuki *et al.* “Web Element Identification by Combining NLP and Heuristic Search for Web Testing” — SANER 2022.
+* Jasem “Assessing the Robustness of Script-Free GUI Testing in Evolving Web Applications” — Bachelor Thesis Proposal, Ruhr-Uni Bochum (2025).
+
+
