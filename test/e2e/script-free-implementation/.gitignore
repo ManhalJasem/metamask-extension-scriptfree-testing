@@ -4,3 +4,4 @@ Pipfile.lock
 requirements.txt
 test_script/*/screenshots/**
 test_script/*/logs/*
+chrome-profiles/mm-chrome-profile/*
