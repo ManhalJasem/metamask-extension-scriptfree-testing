@@ -46,24 +46,31 @@ yarn test:e2e:scriptfree
 
 ## Example Branch Pairs for Locator-Change Experiments
 
-| Before change               | After change                                  |
-| --------------------------- | --------------------------------------------- |
-| `after_app_change_before_locator_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
-
+| Before app change           | After app change and before locator change | After app change and locator change |
+| --------------------------- | ----------------------------------------------- | ---------------------------------- |
+| `before_app_change_b7eae4b` | `after_app_change_before_locator_change_b7eae4b` | `after_app_change_and_locator_change_b7eae4b` |
 ---
+**Description:**
+- **Before app change**: Branch capturing the application without the changes that led to locator failure in the e2e test. *Significance*: to run script free test on it and check script-free robustness.
+- **After app change and before locator change**: Branch capturing the application with the changes that led to locator failures in the e2e test but without the correction of locators. *Significance*: to ensure if the locator change is due to locator failure.
+- **After app change and locator change**: Branch capturing the application with the changes that led to locator failures in the e2e test and the correction of locators in the e2e tests. *Significance*: to run script free test on it and check script-free robustness. Here the normal e2e tests should run without failure.
+
 ## Running the experiment
 
-- Checkout to the branch before test locator change e.g. `git checkout after_app_change_before_locator_change_b7eae4b`
-- Expected results in the before locator change is that the normal e2e tests fail due to not located element
+- Checkout to the branch after app change and before locator e.g. `git checkout after_app_change_before_locator_change_b7eae4b`
+- Expected results in the After app change and before locator branch is that the normal e2e tests fail due to not located element
 - Install dependencies and build the test project `yarn install` then `yarn build:test`
 - To run normal e2e test execute `yarn test:e2e:chrome`
-- Make sure the tests fail due to not located element
+- We made sure that the normal tests fail after app update
+- Now continue on running the script-free tests on the app before this update
+- `git checkout before_app_change_b7eae4b`
+- Install dependencies and build the test project `yarn install` then `yarn build:test`
 - Now, you can run the scriptfree tests with `yarn test:e2e:scriptfree`
-- After Script generation, adjust the metamask runner in "test/e2e/script-free-implementation/test_script/metamask_exp/metamask_tests_runner.py 
+- After Script generation, adjust the metamask runner in "test/e2e/script-free-implementation/test_script/metamask_exp/metamask_tests_runner.py" 
   to run the newly generated selenium script.
 - run the script with `./test/e2e/metamask-ui-run-generated-script`
 - The script should work fine (tip: check screenshots)
-- After ensuring correct run in the before change branch we run the scriptfree test in the after change branch
+- After ensuring correct run in the before app change branch we run the scriptfree test in the after app change branch
 - Now `git checkout after_app_change_and_locator_change_b7eae4b`
 - Expected results here are that both the normal and the script free tests succeed
 - Install dependencies and build the test project `yarn install` then `yarn build:test`
