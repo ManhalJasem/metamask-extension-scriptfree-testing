@@ -31,6 +31,7 @@
     "test:flat:build:states": "node development/genStates.js",
     "test:flat:build:locales": "mkdirp dist/chrome && cp -R app/_locales dist/chrome/_locales",
     "test:flat:build:ui": "yarn test:flat:build:states && browserify --transform babelify --transform brfs ./development/mock-dev.js -o ./development/bundle.js",
+    "install-chrome": "./test/e2e/install-chrome.sh",
     "ganache:start": "./development/run-ganache",
     "sentry:publish": "node ./development/sentry-publish.js",
     "lint": "eslint . --ext js,json",
