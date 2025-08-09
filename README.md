@@ -59,7 +59,7 @@ yarn test:e2e:scriptfree
 
 - Checkout to the branch after app change and before locator e.g. `git checkout after_app_change_before_locator_change_b7eae4b`
 - Expected results in the After app change and before locator branch is that the normal e2e tests fail due to not located element
-- Install dependencies and build the test project `yarn install` then `yarn build:test`
+- Install dependencies and build the test project `yarn install`, `yarn install-chrome` then `yarn build:test`
 - To run normal e2e test execute `yarn test:e2e:chrome`
 - We made sure that the normal tests fail after app update
 - Now continue on running the script-free tests on the app before this update
@@ -68,7 +68,7 @@ yarn test:e2e:scriptfree
 - Now, you can run the scriptfree tests with `yarn test:e2e:scriptfree`
 - After Script generation, adjust the metamask runner in "test/e2e/script-free-implementation/test_script/metamask_exp/metamask_tests_runner.py" 
   to run the newly generated selenium script.
-- run the script with `./test/e2e/metamask-ui-run-generated-script`
+- run the script with `./test/e2e/metamask-ui-run-generated-script.sh`
 - The script should work fine (tip: check screenshots)
 - After ensuring correct run in the before app change branch we run the scriptfree test in the after app change branch
 - Now `git checkout after_app_change_and_locator_change_b7eae4b`
