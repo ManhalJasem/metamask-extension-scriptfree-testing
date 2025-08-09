@@ -9,9 +9,9 @@ from selenium.webdriver.chrome.service import Service
 
 class DriverManager:
     def __init__(self):
-        service = Service(executable_path="/usr/local/bin/chromedriver")
+        service = Service(executable_path="../../../node_modules/.bin/chromedriver113")
         options = webdriver.ChromeOptions()
-        options.binary_location = "/usr/bin/google-chrome"
+        options.binary_location = "../../../node_modules/.bin/chrome113"
         options.add_experimental_option("prefs", {"intl.accept_languages": "en_US"})
         options.add_argument("--no-sandbox")
         options.add_argument("--user-data-dir=chrome-profiles/mm-chrome-profile")

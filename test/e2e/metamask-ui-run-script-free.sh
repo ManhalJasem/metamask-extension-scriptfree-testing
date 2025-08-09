@@ -7,6 +7,7 @@ set -o pipefail
 
 export PATH="$PATH:./node_modules/.bin"
 export GANACHE_ARGS='--blockTime 2 --quiet'
+export SELENIUM_CHROME_BINARY="./node_modules/.bin/chrome113"
 
 concurrently --kill-others \
   --names 'ganache,dapp,e2e' \
