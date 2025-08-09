@@ -1,14 +1,14 @@
 from model import ModelType
 
 # Basic
-BINARY_LOCATION = "/usr/bin/google-chrome"
-CHROMEDRIVER_LOCATION = "/usr/local/bin/chromedriver"
+BINARY_LOCATION = "../../../node_modules/.bin/chrome113"
+CHROMEDRIVER_LOCATION = "../../../node_modules/.bin/chromedriver113"
 MODEL_LOCATION = "data"
 TESTCASE_DIR = "test_cases_metamask_experiment"
 TESTCASE_FILE = "metamaskui"
 APP_SPECIFIC_CHROME_OPTIONS = ["--user-data-dir=chrome-profiles/mm-chrome-profile", 
                                "--load-extension=../../../dist/chrome"]
-ALL_TESTCASE = True # Run all test case
+ALL_TESTCASE = False # Run all test case
 TESTCASES = ["show_qr_code"] # test case set to run if ALL_TESTCASE==false
 OUTPUT_DIRECTORY = "test_script/metamask_exp"
 WRITE_LOCATOR = False
