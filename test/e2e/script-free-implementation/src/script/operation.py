@@ -127,16 +127,16 @@ class Enter(LocatableOperation):
             random.randint(1000, 9999)
         )
         return (
-            "driver.find_element(By.{},'{}').clear()".format(
+            "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
+            + "\n    "
+            + "driver.find_element(By.{},'{}').clear()".format(
                 locator.locator_type.value, locator.value
             )
             + "\n    "
             + "driver.find_element(By.{},'{}').send_keys('{}')".format(
                 locator.locator_type.value, locator.value, self.value
-            )
-            + "\n    "
-            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
-                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
             )
         )
 
@@ -169,12 +169,12 @@ class Select(LocatableOperation):
             random.randint(1000, 9999)
         )
         return (
-            "Select(driver.find_element(By.{},'{}')).select_by_visible_text('{}')".format(
-                locator.locator_type.value, locator.value, self.value
+            "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
             )
             + "\n    "
-            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
-                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            + "Select(driver.find_element(By.{},'{}')).select_by_visible_text('{}')".format(
+                locator.locator_type.value, locator.value, self.value
             )
         )
 
@@ -202,12 +202,12 @@ class Click(LocatableOperation):
             random.randint(1000, 9999)
         )
         return ( 
-            "driver.find_element(By.{},'{}').click()".format(
-                locator.locator_type.value, locator.value
-            ) 
-            + "\n    " 
-            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+            "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
                 locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
+            + "\n    "
+            + "driver.find_element(By.{},'{}').click()".format(
+                locator.locator_type.value, locator.value
             )
         )
 
