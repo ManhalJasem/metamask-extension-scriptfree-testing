@@ -8,6 +8,7 @@ from page.driver_manager import DriverManager
 from script.locator import Locator, LocatorType
 from script.operation_type import OperationType
 from datetime import datetime
+import random
 
 
 class Step(metaclass=ABCMeta):
@@ -86,9 +87,10 @@ class Open(ExecutableOperation):
 
     def to_code(self):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return (
             "driver.get('{}')".format(self.value)
@@ -119,9 +121,10 @@ class Enter(LocatableOperation):
 
     def to_code(self, locator: Locator):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return (
             "driver.find_element(By.{},'{}').clear()".format(
@@ -132,7 +135,9 @@ class Enter(LocatableOperation):
                 locator.locator_type.value, locator.value, self.value
             )
             + "\n    "
-            + "driver.save_screenshot('{}/{}')".format(Setting.SCREENSHOT_FOLDER, screenshot_name)
+            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
         )
 
     def execute(self, locator: Locator, driver_manager: DriverManager) -> None:
@@ -158,16 +163,19 @@ class Select(LocatableOperation):
 
     def to_code(self, locator: Locator):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return (
             "Select(driver.find_element(By.{},'{}')).select_by_visible_text('{}')".format(
                 locator.locator_type.value, locator.value, self.value
             )
             + "\n    "
-            + "driver.save_screenshot('{}/{}')".format(Setting.SCREENSHOT_FOLDER, screenshot_name)
+            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
         )
 
     def execute(self, locator: Locator, driver_manager: DriverManager) -> None:
@@ -188,16 +196,19 @@ class Click(LocatableOperation):
 
     def to_code(self, locator: Locator):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return ( 
             "driver.find_element(By.{},'{}').click()".format(
                 locator.locator_type.value, locator.value
             ) 
             + "\n    " 
-            + "driver.save_screenshot('{}/{}')".format(Setting.SCREENSHOT_FOLDER, screenshot_name)
+            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
         )
 
     def execute(self, locator: Locator, driver_manager: DriverManager) -> None:
@@ -217,16 +228,19 @@ class AssertElement(LocatableOperation):
 
     def to_code(self, locator: Locator):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return ( 
             "assert driver.find_element(By.{},'{}').is_displayed()".format(
                 locator.locator_type.value, locator.value
             )
             + "\n    " 
-            + "driver.save_screenshot('{}/{}')".format(Setting.SCREENSHOT_FOLDER, screenshot_name)
+            + "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
         )
 
     def execute(self, locator: Locator, driver_manager: DriverManager) -> None:
@@ -247,9 +261,10 @@ class ExecuteScript(LocatableOperation):
 
     def to_code(self, locator: Locator):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return ( 
             "driver.execute_script(\"\"\"{}\"\"\")".format(self.__script)
@@ -280,9 +295,10 @@ class AssertTitle(CodableOperation):
 
     def to_code(self) -> str:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return ( 
             "assert '{}' == driver.title, 'expected title: \"{}\", but actual: \"{{}}\"'.format(driver.title)".format(
@@ -308,9 +324,10 @@ class AssertString(CodableOperation):
 
     def to_code(self) -> str:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        screenshot_name = "{}_{}.png".format(
+        screenshot_name = "{}_{}_{}.png".format(
             self.operation_type.name.replace(" ", "_").lower(),
-            timestamp
+            timestamp,
+            random.randint(1000, 9999)
         )
         return ( 
             "assert '{}' in driver.page_source, 'string \"{}\" is not exist'".format(
