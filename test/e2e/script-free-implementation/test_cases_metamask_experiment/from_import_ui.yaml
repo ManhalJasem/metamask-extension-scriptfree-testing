@@ -20,7 +20,7 @@ add_account:
   - click "Log In"
   - ---
   # Actual test cases starts here
-  - click "Network name"
+  - click "network name localhost 8545"
   - ---
   - click "localhost 8545"
   - assert element "account details"
@@ -30,7 +30,8 @@ add_account:
   - enter "2nd account" in "account name"
   - click "Create"
   - ---
-  - assert element "2nd account"
+  - assert element "account name"
+  - assert string "2nd account" exist
 
 
 import_account_with private_key:
@@ -64,12 +65,14 @@ import_and_remove_account:
   - enter "F4EC2590A0C10DE95FBF4547845178910E40F5035320C516A18C117DE02B5669" in "private key"
   - click "Import"
   - ---
-  - assert element "Account 5"
+  - assert element "account name"
+  - assert string "Account 5" exist
   - execute script "document.querySelector('.account-menu__icon').click()"
   - ---
   - click "Remove Account"
   - ---
-  - execute script "document.querySelector('.account-menu__icon').click(); document.querySelector('.menu__item.menu__item.menu__item--clickable:nth-child(2)').click();"
-
-
+  - click "Remove"
+  - ---
+  - assert element "account name"
+  - assert string "Account 1" exist
 
