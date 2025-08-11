@@ -25,4 +25,4 @@ concurrently --kill-others \
   --success first \
   'yarn ganache:start' \
   'yarn dapp' \
-  'sleep 5 && cd test/e2e/script-free-implementation && pipenv run python3 -m test_script.metamask_exp.metamask_tests_runner'
+  'sleep 5 && cd test/e2e/script-free-implementation && pipenv run python3 -m test_script.metamask_exp.metamaskui_tests_runner'
