@@ -13,6 +13,7 @@ class DriverManager:
         options = webdriver.ChromeOptions()
         options.binary_location = "../../../node_modules/.bin/chrome113"
         options.add_experimental_option("prefs", {"intl.accept_languages": "en_US"})
+        options.add_experimental_option("detach", True)
         options.add_argument("--no-sandbox")
         options.add_argument("--user-data-dir=chrome-profiles/mm-chrome-profile")
         options.add_argument("--load-extension=../../../dist/chrome")

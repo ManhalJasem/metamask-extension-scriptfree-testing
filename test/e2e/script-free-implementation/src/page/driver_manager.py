@@ -1,4 +1,6 @@
 import Setting
+import shutil
+import tempfile
 from script.locator import Locator, LocatorType
 from selenium import webdriver
 from selenium.common.exceptions import (NoAlertPresentException,
@@ -17,8 +19,10 @@ class DriverManager:
         options.add_experimental_option("prefs", {"intl.accept_languages": "en_US"})
         options.add_argument("--no-sandbox")
         if app_specific_options:
-            for option in app_specific_options:
-                options.add_argument(option)
+            temp_profile = tempfile.mkdtemp()
+            shutil.copytree("chrome-profiles/mm-chrome-profile", temp_profile, dirs_exist_ok=True, symlinks=True)
+            options.add_argument(f"--user-data-dir={temp_profile}")
+            options.add_argument(app_specific_options[1])
         if Setting.HEADLESS:
             options.add_argument("--headless")
         self.__driver = webdriver.Chrome(service=service, options=options)

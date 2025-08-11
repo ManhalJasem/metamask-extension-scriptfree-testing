@@ -15,10 +15,12 @@ class Tags(Enum):
     __CLICK = Setting.TAG_CLICK
     __ASSERT_ELEMENT = Setting.TAG_ASSERT_ELEMENT
     __EXECUTE_SCRIPT = {"div"}
+    __CLICK_DIV = {"div"}
     __DICT = {
         OperationType.ENTER: __ENTER,
         OperationType.SELECT: __SELECT,
         OperationType.CLICK: __CLICK,
+        OperationType.CLICK_DIV: __CLICK_DIV,
         OperationType.ASSERT_ELEMENT: __ASSERT_ELEMENT,
         OperationType.EXECUTE_SCRIPT: __EXECUTE_SCRIPT
     }

@@ -218,6 +218,38 @@ class Click(LocatableOperation):
         driver_manager.click(locator)
         driver_manager.get_screenshot_as_png()
 
+class ClickDiv(LocatableOperation):
+    def __init__(self, raw_string: str, target: str, once: bool):
+        LocatableOperation.__init__(self, raw_string, target, once)
+
+    @property
+    def operation_type(self) -> OperationType:
+        return OperationType.CLICK_DIV
+
+    def to_code(self, locator: Locator):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        screenshot_name = "{}_{}_{}.png".format(
+            self.operation_type.name.replace(" ", "_").lower(),
+            timestamp,
+            random.randint(1000, 9999)
+        )
+        return ( 
+            "driver.find_element(By.{},'{}').screenshot('{}/{}')".format(
+                locator.locator_type.value, locator.value, Setting.SCREENSHOT_FOLDER, screenshot_name
+            )
+            + "\n    "
+            + "driver.find_element(By.{},'{}').click()".format(
+                locator.locator_type.value, locator.value
+            )
+        )
+
+    def execute(self, locator: Locator, driver_manager: DriverManager) -> None:
+        sleep(Setting.SLEEP_TIME)
+        if Setting.SHOW_OPERATION:
+            print("click div {}".format(locator.value))
+        driver_manager.click(locator)
+        driver_manager.get_screenshot_as_png()
+
 class AssertElement(LocatableOperation):
     def __init__(self, raw_string: str, target: str, once: bool):
         LocatableOperation.__init__(self, raw_string, target, once)
@@ -267,7 +299,9 @@ class ExecuteScript(LocatableOperation):
             random.randint(1000, 9999)
         )
         return ( 
-            "driver.execute_script(\"\"\"{}\"\"\")".format(self.__script)
+            "sleep(2)"
+            + "\n    "
+            + "driver.execute_script(\"\"\"{}\"\"\")".format(self.__script)
             + "\n    " 
             + "driver.save_screenshot('{}/{}')".format(Setting.SCREENSHOT_FOLDER, screenshot_name)
         )
