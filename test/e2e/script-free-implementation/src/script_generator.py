@@ -1,6 +1,6 @@
 import traceback
 from time import time
-
+import sys
 import Setting
 from model import Model
 from script.script_writer import LocatorWriter, ScriptWriter
@@ -8,6 +8,9 @@ from script.strategy.strategy import Strategy
 from script.strategy.transition_matching_strategy import \
     TransitionMatchingStrategy
 from script.test_case import TestCaseParser
+
+if len(sys.argv) > 1:
+    Setting.TESTCASE_FILE = sys.argv[1]
 
 start = time()
 parser = TestCaseParser()

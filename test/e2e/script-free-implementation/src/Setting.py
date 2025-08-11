@@ -21,7 +21,7 @@ SCREENSHOT_FOLDER = "test_script/metamask_exp/screenshots"
 TRANSITION_SLEEP_TIME = 1  # wait after page transition
 SHOW_OPERATION = True
 IDF_WEIGHT = 1.5  # The closer to 1, the bigger
-TAG_CLICK = {"button", "img", "a", "span"}  # click target tags
+TAG_CLICK = {"button", "img", "a"}  # click target tags
 TAG_ASSERT_ELEMENT = {"span","textarea", "input", "button", "img", "a", "div"} 
 
 # Transition-level search
