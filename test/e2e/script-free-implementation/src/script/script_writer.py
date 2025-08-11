@@ -27,6 +27,7 @@ class ScriptWriter:
 # generation time: {generation_time}
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
+from time import sleep
 {method_string}
 """
         with open(filename, mode="w") as f:

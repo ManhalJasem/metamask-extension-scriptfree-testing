@@ -11,6 +11,7 @@ from script.operation import (
     AssertString,
     AssertTitle,
     Click,
+    ClickDiv,
     Enter,
     ExecuteScript,
     Open,
@@ -62,6 +63,8 @@ class TestCaseParser:
                         step = Select(raw_step, tokens[3], tokens[1], False)
                     elif re.fullmatch(r'click "[^"]+"', raw_step):
                         step = Click(raw_step, tokens[1], False)
+                    elif re.fullmatch(r'click div "[^"]+"', raw_step):
+                        step = ClickDiv(raw_step, tokens[2], False)
                     elif re.fullmatch(r'assert element "[^"]+"', raw_step):
                         step = AssertElement(raw_step, tokens[2], False)
                     elif re.fullmatch(r'assert string "[^"]+" exist', raw_step):

@@ -5,11 +5,11 @@ BINARY_LOCATION = "../../../node_modules/.bin/chrome113"
 CHROMEDRIVER_LOCATION = "../../../node_modules/.bin/chromedriver113"
 MODEL_LOCATION = "data"
 TESTCASE_DIR = "test_cases_metamask_experiment"
-TESTCASE_FILE = "metamaskui"
+TESTCASE_FILE = "from_import_ui"
 APP_SPECIFIC_CHROME_OPTIONS = ["--user-data-dir=chrome-profiles/mm-chrome-profile", 
                                "--load-extension=../../../dist/chrome"]
-ALL_TESTCASE = False # Run all test case
-TESTCASES = ["show_qr_code"] # test case set to run if ALL_TESTCASE==false
+ALL_TESTCASE = True # Run all test case
+TESTCASES = ["add_account"] # test case set to run if ALL_TESTCASE==false
 OUTPUT_DIRECTORY = "test_script/metamask_exp"
 WRITE_LOCATOR = False
 
@@ -21,8 +21,8 @@ SCREENSHOT_FOLDER = "test_script/metamask_exp/screenshots"
 TRANSITION_SLEEP_TIME = 1  # wait after page transition
 SHOW_OPERATION = True
 IDF_WEIGHT = 1.5  # The closer to 1, the bigger
-TAG_CLICK = {"button", "img", "a"}  # click target tags
-TAG_ASSERT_ELEMENT = {"span","textarea", "input", "button", "img", "a"} 
+TAG_CLICK = {"button", "img", "a", "span"}  # click target tags
+TAG_ASSERT_ELEMENT = {"span","textarea", "input", "button", "img", "a", "div"} 
 
 # Transition-level search
 RESTART_DRIVER = True

@@ -5,6 +5,7 @@ class OperationType(Enum):
     ENTER = "enter"
     SELECT = "select"
     CLICK = "click"
+    CLICK_DIV = "click div"
     OPEN = "open"
     PAGE_TRANSITION = "page_transition"
     ASSERT_ELEMENT = "assert element"
