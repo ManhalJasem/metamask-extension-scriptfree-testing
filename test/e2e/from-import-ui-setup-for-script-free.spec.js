@@ -159,7 +159,7 @@ describe('Using MetaMask with an existing account', function () {
 
   describe('Show account information', () => {
     it('shows the correct account address', async () => {
-      await driver.findElement(By.css('.account-details__details-button')).click()
+      await driver.findElement(By.css('.wallet-view__details-button')).click()
       await driver.findElement(By.css('.qr-wrapper')).isDisplayed()
       await delay(regularDelayMs)
 
@@ -171,7 +171,7 @@ describe('Using MetaMask with an existing account', function () {
     })
 
     it('shows a QR code for the account', async () => {
-      await driver.findElement(By.css('.account-details__details-button')).click()
+      await driver.findElement(By.css('.wallet-view__details-button')).click()
       await driver.findElement(By.css('.qr-wrapper')).isDisplayed()
       const detailModal = await driver.findElement(By.css('span .modal'))
       await delay(regularDelayMs)

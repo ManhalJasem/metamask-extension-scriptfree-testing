@@ -1,4 +1,4 @@
-from test_script.metamask_exp.test_script_2508110609_metamaskui_FASTTEXT_300_SMALL_5_5_3 import show_qr_code, add_account
+from test_script.metamask_exp.test_script_2508110709_metamaskui_FASTTEXT_300_SMALL_5_5_3 import show_qr_code, add_account
 from test_script.metamask_exp.driver_manager import DriverManager
 
 

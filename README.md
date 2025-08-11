@@ -82,6 +82,7 @@ yarn test:e2e:scriptfree
    ```bash
    git checkout before_app_change_b7eae4b
    yarn install
+   yarn install-chrome
    yarn build:test
    yarn test:e2e:scriptfree
    ```
