@@ -46,12 +46,13 @@ class ElementContainer:
         self.__elem_dict: DefaultDict[OperationType, List[Element]] = defaultdict(list)
         for elem in self.__elems:
             bs_elem = elem.bs_elem
-            for operation_type in [OperationType.CLICK, OperationType.ENTER, OperationType.SELECT, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
+            for operation_type in [OperationType.CLICK, OperationType.CLICK_DIV, OperationType.ENTER, OperationType.SELECT, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
                 if elem.name in Tags.get_target_tags(operation_type):
                     self.__elem_dict[operation_type].append(elem)
             if elem.name == "input":
                 if "type" in bs_elem.attrs and bs_elem["type"] in CLICK_TYPES:
                     self.__elem_dict[OperationType.CLICK].append(elem)
+                    self.__elem_dict[OperationType.CLICK_DIV].append(elem)
                 else:
                     self.__elem_dict[OperationType.ENTER].append(elem)
 

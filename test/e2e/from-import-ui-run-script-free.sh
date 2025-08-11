@@ -7,7 +7,7 @@ set -o pipefail
 
 export PATH="$PATH:./node_modules/.bin"
 export GANACHE_ARGS='--blockTime 2 --quiet'
-SELENIUM_BROWSER="chrome" 
+export SELENIUM_BROWSER="chrome" 
 export SELENIUM_CHROME_BINARY="./node_modules/.bin/chrome113"
 export GANACHE_ARGS="$GANACHE_ARGS --deterministic --account=0x53CB0AB5226EEBF4D872113D98332C1555DC304443BEE1CF759D15798D3C55A9,25000000000000000000"
 

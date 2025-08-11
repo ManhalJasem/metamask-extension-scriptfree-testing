@@ -54,7 +54,7 @@ class PageVariation:
     @property
     def score(self) -> float:
         total = 0
-        for operation_type in [OperationType.ENTER, OperationType.SELECT, OperationType.CLICK, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
+        for operation_type in [OperationType.ENTER, OperationType.SELECT, OperationType.CLICK, OperationType.CLICK_DIV, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
             if self.get(operation_type) is not None:
                 total += self.get(operation_type).score
         return total
@@ -75,7 +75,7 @@ class PageVariation:
         return test_script
 
     def print(self, indent: int = 0):
-        for operation_type in [OperationType.ENTER, OperationType.SELECT, OperationType.CLICK, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
+        for operation_type in [OperationType.ENTER, OperationType.SELECT, OperationType.CLICK, OperationType.CLICK_DIV, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
             if self.get(operation_type) is not None:
                 self.get(operation_type).print(indent)
         print("  " * indent, end="")
@@ -84,7 +84,7 @@ class PageVariation:
         print("------------")
 
     def easy_print(self):
-        for operation_type in [OperationType.ENTER, OperationType.SELECT, OperationType.CLICK, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
+        for operation_type in [OperationType.ENTER, OperationType.SELECT, OperationType.CLICK, OperationType.CLICK_DIV, OperationType.ASSERT_ELEMENT, OperationType.EXECUTE_SCRIPT]:
             if self.get(operation_type) is not None:
                 self.get(operation_type).print()
 
@@ -222,6 +222,9 @@ def {}(driver):
         click_variations = self.__get_variation_by_type(
             steps_in_page, vector_calculator, OperationType.CLICK
         )[: Setting.SEARCH_WIDTH]
+        click_div_variations = self.__get_variation_by_type(
+            steps_in_page, vector_calculator, OperationType.CLICK_DIV
+        )[: Setting.SEARCH_WIDTH]
         assert_element_variations = self.__get_variation_by_type(
             steps_in_page, vector_calculator, OperationType.ASSERT_ELEMENT
         )[: Setting.SEARCH_WIDTH]
@@ -230,8 +233,8 @@ def {}(driver):
         )[: Setting.SEARCH_WIDTH]
 
         page_variations: List[PageVariation] = []
-        for enter_variation, select_variation, click_variation, assert_element_variation, execute_script_variation in itertools.product(
-            enter_variations, select_variations, click_variations, assert_element_variations, execute_script_variations
+        for enter_variation, select_variation, click_variation, click_div_variations, assert_element_variation, execute_script_variation in itertools.product(
+            enter_variations, select_variations, click_variations, click_div_variations, assert_element_variations, execute_script_variations
         ):
             page_variations.append(
                 PageVariation(
@@ -239,6 +242,7 @@ def {}(driver):
                         OperationType.ENTER: enter_variation,
                         OperationType.SELECT: select_variation,
                         OperationType.CLICK: click_variation,
+                        OperationType.CLICK_DIV: click_div_variations,
                         OperationType.ASSERT_ELEMENT: assert_element_variation,
                         OperationType.EXECUTE_SCRIPT: execute_script_variation,
                     }
