@@ -5,7 +5,7 @@ BINARY_LOCATION = "../../../node_modules/.bin/chrome113"
 CHROMEDRIVER_LOCATION = "../../../node_modules/.bin/chromedriver113"
 MODEL_LOCATION = "data"
 TESTCASE_DIR = "test_cases_metamask_experiment"
-TESTCASE_FILE = "from_import_ui"
+TESTCASE_FILE = "incremental_security"
 APP_SPECIFIC_CHROME_OPTIONS = ["--user-data-dir=chrome-profiles/mm-chrome-profile", 
                                "--load-extension=../../../dist/chrome"]
 ALL_TESTCASE = True # Run all test case

@@ -1,0 +1,20 @@
+first_time_flow:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - click "Get Started"
+  - ---
+  - click "Create a Wallet"
+  - ---
+  - click "No Thanks"
+  - ---
+  - enter "correct horse battery staple" in "create password"
+  - enter "correct horse battery staple" in "confirm password"
+  - click "agree checkbox"
+  - click "Create"
+  - ---
+  - click "Remind Me Later"
+  - ---
+  - click "Account Details"
+  - ---
+  - assert element "QR ellip address"
+  - execute script "document.querySelector('.account-modal-close').click()"
