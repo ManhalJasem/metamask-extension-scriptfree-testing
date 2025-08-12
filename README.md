@@ -116,7 +116,20 @@ The original MetaMask extension source is available at
 [https://github.com/MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension).
 
 ---
+## MetaMask Locator Changes — Commits
 
+The table below is imported from `metamask_locator_changes_commits.csv` and lists the commits related to locator changes used in the experiment.
+
+| Locator only Changes | | | | | | | | | | | |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Repo | SHA Commit | Description/affected files | Results Description | Number of test cases | Nr. Tc fail on before locator change and run after | Number of converted cases | Number of locator changes | Number Test case passes in Script-free | Number of locator passes in Script-free | Test case pass rate in % | Locator pass rate in % |
+| MetaMask/metamask-snaps-beta | f501f62b2988afb5b33a6543e44361c628eefed3 | test/e2e/* | Original Tests pass in before and after change (prophylactic locator change) | 25 | 0 | 0 | 25 | 0 | 0 | 0 | 0 |
+|  | b7eae4ba80e06f1d2069575d9b96dae66ea4496f | test/e2e/metamask-ui.spec.js, test/e2e/from-import-ui.spec.js | 5 of 6 test case pass in script-free and 9 of 9 Locator Changes passed in Script-free  | 6 | 6 | 6 | 9 | 5 | 9 | 83.3333333333333 | 100 |
+|  | 9d5be5d29fcdab1273e30810f87de4624b8622a1 | test/e2e/incremental-security.spec.js | Tests not convertible, requires opening two tabs | 1 | 1 | 0 | 2 | 0 | 0 | 0 | 0 |
+|  | a6d4725e5c946e66f1f79afdc80563b807500104 | test/e2e/incremental-security.spec.js | 1 of 1 test case pass in script-free and 1 of 1 locator change passed in script-free | 1 | 1 | 1 | 1 | 1 | 1 | 100 | 100 |
+|  | 32a3f5ad7b8d30c1d4843152e575770b189146ea | test/e2e/metamask-ui.spec.js | Test case not running on both versions | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 |
+
+---
 ## Further Reading
 
 - Kirinuki *et al.* “NLP-Assisted Web Element Identification Toward Script-Free Testing” — ICSME 2021.  
