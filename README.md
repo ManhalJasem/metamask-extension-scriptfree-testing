@@ -46,9 +46,10 @@ yarn test:e2e:scriptfree
 
 ## Example Branch Pairs for Locator-Change Experiments
 
-| Before app change           | After app change, before locator change             | After app change and locator change                     |
-| --------------------------- | --------------------------------------------------- | ------------------------------------------------------- |
-| `before_app_change_b7eae4b` | `after_app_change_before_locator_change_b7eae4b`    | `after_app_change_and_locator_change_b7eae4b`           |
+| Before app change           | After app change, before locator change             | After app change and locator change                     | impacted files      |
+| --------------------------- | --------------------------------------------------- | ------------------------------------------------------- | ------------------- |
+| `before_app_change_b7eae4b` | `after_app_change_before_locator_change_b7eae4b`    | `after_app_change_and_locator_change_b7eae4b`           | `metamask-ui.spec.js, from-import-ui.spec.js` |
+| `before_app_change_a6d4725` | `after_app_change_before_locator_change_a6d4725`    | `after_app_change_and_locator_change_a6d4725`           | `incrimental-security.spec.js` |
 
 **Descriptions**
 
