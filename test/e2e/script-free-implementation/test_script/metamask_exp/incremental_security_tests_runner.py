@@ -1,4 +1,4 @@
-from test_script.metamask_exp.test_script_2508120516_incremental_security_FASTTEXT_300_SMALL_5_5_3 import first_time_flow
+from test_script.metamask_exp.test_script_2508120618_incremental_security_FASTTEXT_300_SMALL_5_5_3 import first_time_flow
 from test_script.metamask_exp.driver_manager import DriverManager
 
 
