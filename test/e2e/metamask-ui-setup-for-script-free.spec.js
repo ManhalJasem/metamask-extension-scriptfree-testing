@@ -23,6 +23,8 @@ const {
   waitUntilXWindowHandles,
 } = require('./helpers.js')
 const fetchMockResponses = require('./fetch-mocks.js')
+const { console } = require('inspector')
+const fs = require('fs').promises; // use promises for async/await
 
 describe('MetaMask', function () {
   let extensionId
@@ -58,6 +60,14 @@ describe('MetaMask', function () {
         break
       }
     }
+    if (extensionId) {
+      const filePath = path.resolve(__dirname, 'extensionId.txt');
+      await fs.writeFile(filePath, extensionId, 'utf8');
+      console.log(`Extension ID saved to ${filePath}`);
+    } else {
+      console.error('Extension ID was not retrieved.');
+    }
+
     // Depending on the state of the application built into the above directory (extPath) and the value of
     // METAMASK_DEBUG we will see different post-install behaviour and possibly some extra windows. Here we
     // are closing any extraneous windows to reset us to a single window before continuing.
@@ -110,7 +120,7 @@ describe('MetaMask', function () {
   })
 
   after(async function () {
-    driver.quit()
+    await driver.quit()
   })
 
   describe('Going through the first time flow', () => {
