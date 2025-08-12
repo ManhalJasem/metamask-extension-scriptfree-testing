@@ -49,3 +49,4 @@ notes.txt
 
 .coveralls.yml
 .nyc_output
+test/e2e/extensionId.txt
