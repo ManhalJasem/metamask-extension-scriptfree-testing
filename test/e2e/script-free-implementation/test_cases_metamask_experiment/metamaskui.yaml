@@ -1,0 +1,31 @@
+# Test case for DHIS2
+# Show account information
+# Prerequisite: Run all test cases until Show account information in metamask-ui.spec.js
+show_qr_code:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - enter "correct horse battery staple" in "password" 
+  - click "Log In"
+  - ---
+  # Actual test case starts here
+  - click "Account Details"
+  - ---
+  - assert element "QR Wrapper"
+  - execute script "document.querySelector('.account-modal-close').click()"
+  - ---
+  - assert element "Account Details"
+
+add_account:
+  - open "chrome-extension://fochammdjkalfjmglakiadgeeipdajka/home.html#"
+  # Not related to the test case, but needed to log in
+  - enter "correct horse battery staple" in "password" 
+  - click "Log In"
+  - ---
+  - assert element "Account Details"
+  - execute script "document.querySelector('.account-menu__icon').click(); document.querySelector('.menu__item.menu__item.menu__item--clickable').click();"
+  # Actual test case starts here
+  - ---
+  - enter "2nd account" in "account name"
+  - click "Create"
+  - ---
+  - assert element "2nd account"
