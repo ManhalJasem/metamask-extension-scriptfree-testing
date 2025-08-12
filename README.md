@@ -85,6 +85,16 @@ yarn test:e2e:scriptfree
    yarn install
    yarn install-chrome
    yarn build:test
+   ./test/e2e/get_extension_id.sh
+   ```
+   Now you will get the right extension id in `test/e2e/extension_id.txt`.
+
+   Then adjust the urls in the script-free tests in `test/e2e/script-free-implementation/test_cases_metamsk_experiment` to your extension_id. only these steps: 
+   
+   `- open "chrome-extension://{extension_id}/home.html#"`
+   
+   Then run:
+   ```bash
    yarn test:e2e:scriptfree
    ```
    After script generation, adjust the MetaMask runner at  
